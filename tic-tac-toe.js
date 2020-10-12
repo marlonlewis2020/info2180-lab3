@@ -108,7 +108,7 @@ window.onload = function(){
                 box.innerHTML='';
                 box.style.pointerEvents = 'auto';
                 youWon.classList.remove('status.you-won');
-                youWon.textContent="Move your mouse over a square and click to play as 'Team X' (wins: " + dict[T] ") or as 'Team O' (wins: " + dict[F] + ").";
+                youWon.textContent="Move your mouse over a square and click to play as 'Team X' (wins: " + dict[T] + ") or as 'Team O' (wins: " + dict[F] + ").";
                 counted = 0;
                 youWon.classList.remove('you-won');
             }
