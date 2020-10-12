@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Titan+One&display=swap');
+ @import url('https://fonts.googleapis.com/css?family=Titan+One&display=swap');
 
 :root{
   --black: #1a202c;
@@ -89,7 +89,7 @@ h1 span {
   font-weight: bold;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items:  center;
 }
 
 .square.X {
