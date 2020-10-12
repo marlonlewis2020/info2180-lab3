@@ -2,34 +2,34 @@ window.onload = function(){
     let myPlays = [];
     const T = 'X';
     const F = 'O';
-    let turn = T;
+    let turn;
     counted = 0;
     const myboard = document.getElementById('board').getElementsByTagName('div');
     let youWon = document.getElementById('status');
 
-    console.log(youWon);
-
     function solveForWinner(selection){
-            var a = myPlays[1-1] == myPlays[2-1] && myPlays[2-1] == myPlays[3-1] && myPlays[3-1] == selection;
-            var b = myPlays[4-1] == myPlays[5-1] && myPlays[5-1] == myPlays[6-1] && myPlays[5-1] == selection;
-            var c = myPlays[7-1] == myPlays[8-1] && myPlays[7-1] == myPlays[9-1] && myPlays[7-1] == selection;
-            var d = myPlays[1-1] == myPlays[4-1] && myPlays[1-1] == myPlays[7-1] && myPlays[1-1] == selection;
-            var e = myPlays[2-1] == myPlays[5-1] && myPlays[2-1] == myPlays[8-1] && myPlays[2-1] == selection;
-            var f = myPlays[3-1] == myPlays[6-1] && myPlays[3-1] == myPlays[9-1] && myPlays[3-1] == selection;
-            var g = myPlays[1-1] == myPlays[5-1] && myPlays[1-1] == myPlays[9-1] && myPlays[1-1] == selection;
-            var h = myPlays[3-1] == myPlays[5-1] && myPlays[3-1] == myPlays[7-1] && myPlays[3-1] == selection;
+        var a = myPlays[1-1] == myPlays[2-1] && myPlays[2-1] == myPlays[3-1] && myPlays[3-1] == selection;
+        var b = myPlays[4-1] == myPlays[5-1] && myPlays[5-1] == myPlays[6-1] && myPlays[5-1] == selection;
+        var c = myPlays[7-1] == myPlays[8-1] && myPlays[7-1] == myPlays[9-1] && myPlays[7-1] == selection;
+        var d = myPlays[1-1] == myPlays[4-1] && myPlays[1-1] == myPlays[7-1] && myPlays[1-1] == selection;
+        var e = myPlays[2-1] == myPlays[5-1] && myPlays[2-1] == myPlays[8-1] && myPlays[2-1] == selection;
+        var f = myPlays[3-1] == myPlays[6-1] && myPlays[3-1] == myPlays[9-1] && myPlays[3-1] == selection;
+        var g = myPlays[1-1] == myPlays[5-1] && myPlays[1-1] == myPlays[9-1] && myPlays[1-1] == selection;
+        var h = myPlays[3-1] == myPlays[5-1] && myPlays[3-1] == myPlays[7-1] && myPlays[3-1] == selection;
         
-            if (a || b || c || d || e || f || g || h ){
-                const winner = selection;
-                for (let dex = 0; dex < myboard.length; dex++) {
-                    //myboard[dex].removeEventListener('click', handleclick(myboard[dex]));
-                }
-                console.log("We have a winner");
-                youWon.classList.add('you-won');
-                youWon.textContent="Congratulations! " + winner + " is the Winner!";
-                return
+        if (a || b || c || d || e || f || g || h ){
+            turn = T;
+            const winner = selection;
+            let dox = 0
+            for (dox ; dox < myboard.length; dox++) {
+                var box =  myboard[dox];
+                box.style.pointerEvents = 'none';
             }
-        myPlays = [];
+            console.log("We have a winner");
+            youWon.classList.add('you-won');
+            youWon.textContent="Congratulations! " + winner + " is the Winner!";
+        } 
+        myPlays = [];  
     }
     
     function choices(){
@@ -46,6 +46,7 @@ window.onload = function(){
             box.classList.add(T);
             box.innerHTML = T;
             turn = F;
+            box.style.pointerEvents = 'none';
             choices();
             solveForWinner(turnclass);
         }
@@ -54,15 +55,10 @@ window.onload = function(){
             box.classList.remove(T);
             box.classList.add(F);
             turn = T;
+            box.style.pointerEvents = 'none';
             choices();
             solveForWinner(turnclass);
         }
-        //testing remove #1
-        box.removeEventListener('click', handleclick => {
-            counted++;
-            const thisClass = turn;
-            placeMark(box, thisClass);
-        });
     }
 
     function addSquare(item, index) {
@@ -70,6 +66,8 @@ window.onload = function(){
     }
     
     function addListeners() {
+        myPlays = [];
+        turn = T;
         var square = 0;
         for (square; square < myboard.length; square++){
             const box = myboard[square];
@@ -90,7 +88,6 @@ window.onload = function(){
     }
 
     addListeners();
-    
         var i;
         for (i = 0; i < myboard.length; i++){
             addSquare(myboard[i], i);
@@ -99,18 +96,33 @@ window.onload = function(){
         let new_game_btn = document.getElementsByClassName("btn")[0];
             
         new_game_btn.addEventListener('click', myfunc => {
-            for (let dex = 0; dex < myboard.length; dex++) {
-                myboard[dex].classList.remove(T);
-                myboard[dex].classList.remove(F);
-                myboard[dex].innerHTML='';
+            let dex = 0
+            
+            for (dex; dex < myboard.length; dex++) {
+                var box = myboard[dex];
+                box.classList.remove(T);
+                box.classList.remove(F);
+                box.innerHTML='';
+                box.style.pointerEvents = 'auto';
                 youWon.classList.remove('status.you-won');
                 youWon.textContent="Move your mouse over a square and click to play an X or an O.";
                 counted = 0;
-                turn = T;
                 youWon.classList.remove('you-won');
-                //myboard[dex].removeEventListener('click', handleclick(myboard[dex]));
+                
             }
-            addListeners();
+            myPlays = [];
+            turn = T;
+            //addListeners();
         }) 
 
 }
+
+/*
+            //1
+            box.removeEventListener('click', handleclick => {
+                counted++;
+                const thisClass = turn;
+                placeMark(box, thisClass);
+            });
+            //2
+ */
