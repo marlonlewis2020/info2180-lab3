@@ -6,6 +6,7 @@ window.onload = function(){
     counted = 0;
     const myboard = document.getElementById('board').getElementsByTagName('div');
     let youWon = document.getElementById('status');
+    var dict = {'X' : 0, 'O' : 0};
 
     function solveForWinner(selection){
         var a = myPlays[1-1] == myPlays[2-1] && myPlays[2-1] == myPlays[3-1] && myPlays[3-1] == selection;
@@ -20,23 +21,32 @@ window.onload = function(){
         if (a || b || c || d || e || f || g || h ){
             turn = T;
             const winner = selection;
+            dict[winner] += 1 
             let dox = 0
             for (dox ; dox < myboard.length; dox++) {
                 var box =  myboard[dox];
                 box.style.pointerEvents = 'none';
             }
-            console.log("We have a winner");
+            console.log("We have a winner: " + winner);
             youWon.classList.add('you-won');
             youWon.textContent="Congratulations! " + winner + " is the Winner!";
+            console.log("     'Team X'   :   " + dict[T]);
+            console.log("     'Team O'   :   " + dict[F]); 
         } 
-        myPlays = [];  
+        myPlays = [];
+        if ((counted == 9) && (!a && !b & !c & !d && !e && !f && !g && !h )){
+            console.log("It's a Draw! Click 'New Game' to Play Again!");
+            youWon.textContent="It's a DRAW! Press 'New Game' to Play Again!";
+            console.log("     'Team X'   :   " + dict[T]);
+            console.log("     'Team O'   :   " + dict[F]); 
+        }
+        
     }
     
     function choices(){
         for (let o = 0; o < 9; o++){
             myPlays.push(myboard[o].innerHTML);
         }
-        console.log(myPlays);
     }
 
     function placeMark(box, turnclass){
@@ -46,19 +56,16 @@ window.onload = function(){
             box.classList.add(T);
             box.innerHTML = T;
             turn = F;
-            box.style.pointerEvents = 'none';
-            choices();
-            solveForWinner(turnclass);
         }
         else if (turnclass == F) {
             box.innerHTML = F;
             box.classList.remove(T);
             box.classList.add(F);
             turn = T;
-            box.style.pointerEvents = 'none';
-            choices();
-            solveForWinner(turnclass);
         }
+        box.style.pointerEvents = 'none';
+        choices();
+        solveForWinner(turnclass);
     }
 
     function addSquare(item, index) {
@@ -97,7 +104,6 @@ window.onload = function(){
             
         new_game_btn.addEventListener('click', myfunc => {
             let dex = 0
-            
             for (dex; dex < myboard.length; dex++) {
                 var box = myboard[dex];
                 box.classList.remove(T);
@@ -108,21 +114,9 @@ window.onload = function(){
                 youWon.textContent="Move your mouse over a square and click to play an X or an O.";
                 counted = 0;
                 youWon.classList.remove('you-won');
-                
             }
             myPlays = [];
             turn = T;
             //addListeners();
         }) 
-
 }
-
-/*
-            //1
-            box.removeEventListener('click', handleclick => {
-                counted++;
-                const thisClass = turn;
-                placeMark(box, thisClass);
-            });
-            //2
- */
