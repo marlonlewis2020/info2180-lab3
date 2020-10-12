@@ -30,18 +30,12 @@ window.onload = function(){
                 var box =  myboard[dox];
                 box.style.pointerEvents = 'none';
             }
-            console.log("We have a winner: " + winner);
             youWon.classList.add('you-won');
             youWon.textContent="Congratulations! " + winner + " is the Winner!";
-            console.log("     'Team X'   :   " + dict[T]);
-            console.log("     'Team O'   :   " + dict[F]); 
         } 
         myPlays = [];
         if ((counted == 9) && (!a && !b & !c & !d && !e && !f && !g && !h )){
-            console.log("It's a Draw! Click 'New Game' to Play Again!");
             youWon.textContent="It's a DRAW! Press 'New Game' to Play Again!";
-            console.log("     'Team X'   :   " + dict[T]);
-            console.log("     'Team O'   :   " + dict[F]); 
         }
         
     }
@@ -114,7 +108,7 @@ window.onload = function(){
                 box.innerHTML='';
                 box.style.pointerEvents = 'auto';
                 youWon.classList.remove('status.you-won');
-                youWon.textContent="Move your mouse over a square and click to play an X or an O.";
+                youWon.textContent="Move your mouse over a square and click to play as 'Team X' (wins: " + dict[T] ") or as 'Team O' (wins: " + dict[F] + ").";
                 counted = 0;
                 youWon.classList.remove('you-won');
             }
