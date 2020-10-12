@@ -7,6 +7,9 @@ window.onload = function(){
     const myboard = document.getElementById('board').getElementsByTagName('div');
     let youWon = document.getElementById('status');
     var dict = {'X' : 0, 'O' : 0};
+    const body = document.body.style;
+    body.width = '100vw';
+    body.height = '100vh';
 
     function solveForWinner(selection){
         var a = myPlays[1-1] == myPlays[2-1] && myPlays[2-1] == myPlays[3-1] && myPlays[3-1] == selection;
