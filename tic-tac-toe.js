@@ -21,8 +21,6 @@ window.onload = function(){
     })
 
     function points(){
-        //let points = " - - - - - - X - - - - - - | - - - - - - O - - - - - - " + 
-        //"\n - - - - - - " + wins[0] + " - - - - - -| - - - - - - " + wins[1] + " - - - - - - ";
         let points = "Move your mouse over a square and click to play an X or an O.";
         return points;
     }
