@@ -21,7 +21,7 @@ window.onload = function(){
     points_table();
 
     controls.insertBefore(para, new_game[0]);
-    new_game[0].style.margin = "10px 70px";
+    new_game[0].style.margin = "10px 80px";
     para.style.backgroundColor = "#cbd5e0";
     para.style.fontSize = "24px";
     para.style.width = "250px";
