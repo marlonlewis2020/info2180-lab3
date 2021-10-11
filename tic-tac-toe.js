@@ -9,19 +9,17 @@ window.onload = function(){
     const players = ["X","O"];
 
     const para = document.createElement("div");
-    para.innerHTML = "Let's Begin, Player '"+player+"'!";
     let score_table = document.createElement("table");
+    let caption = document.createElement("caption");
     let tb_row1 = document.createElement("tr"); 
     let tb_row2 = document.createElement("tr");
     let x_head = document.createElement("td"); 
     let o_head = document.createElement("td");
-    
-    let caption = document.createElement("caption");
     let x_score = document.createElement("td"); 
     let o_score = document.createElement("td");
     x_score.innerHTML = wins[0]; o_score.innerHTML = wins[1];
      
-    style_xo(); points_table(); newElements_Styles();
+    style_xo(); points_table(); newElements_andStyles();
 
     for (var tile = 0; tile < board_tiles.length; tile++){
         let ex = board_tiles[tile];
@@ -38,12 +36,11 @@ window.onload = function(){
         for (var count = 0; count < pops.length; count++){
             var pop = pops[count]; //gets the 'i'th list from the pops list
             if (board_tiles[pop[0]].innerHTML.localeCompare(board_tiles[pop[1]].innerHTML)==0 && 
-                board_tiles[pop[1]].innerHTML.localeCompare(board_tiles[pop[2]].innerHTML)==0){
-                if (board_tiles[pop[0]].innerHTML !=  ""){
-                    winner = board_tiles[pop[0]].innerHTML;
-                    plays++;
-                    runWinner();
-                }
+                board_tiles[pop[1]].innerHTML.localeCompare(board_tiles[pop[2]].innerHTML)==0 &&
+                board_tiles[pop[0]].innerHTML !=  ""){
+                winner = board_tiles[pop[0]].innerHTML;
+                plays++;
+                runWinner();
             }          
         }
     }
@@ -53,11 +50,7 @@ window.onload = function(){
         else if (winner =="O"){ wins[1]++}
         status.innerHTML = "Congratulations! " + winner + " is the Winner!";
         status.classList.add("you-won");
-        lock();
-        update_points();
-    }
-
-    function update_points(){
+        for (i=0;i<9;i++){board_tiles[i].style.pointerEvents = 'none'};
         game_number++;
         x_score.innerHTML = wins[0];
         o_score.innerHTML = wins[1];    
@@ -66,7 +59,7 @@ window.onload = function(){
     function style_xo(){
         para.style.padding = "15px 5px";
         if(player=="X"){para.style.color = "#3182ce"}
-       else {para.style.color = "#E57996"};
+        else {para.style.color = "#E57996"};
     }
 
     function points_table(){
@@ -86,10 +79,8 @@ window.onload = function(){
        checkWinner();
        player = players[++plays%2];
        style_xo();
-       turn_tracker();
+       para.innerHTML = "It Is Player "+player+"'s Turn!";
    }
-
-   function turn_tracker(){para.innerHTML = "It Is Player "+player+"'s Turn!"}
    
    function clear(){
        caption.innerHTML = "Game # "+game_number+"! Match Points";
@@ -103,16 +94,13 @@ window.onload = function(){
        }
     }
 
-    function lock(){
-        for (i=0;i<9;i++){board_tiles[i].style.pointerEvents = 'none'}
-    }
-
-    function newElements_Styles(){
+    function newElements_andStyles(){
         game.insertBefore(score_table,gameboard);
         game.insertBefore(para, gameboard);
 
         new_game[0].style.margin = "10px 80px";
         
+        para.innerHTML = "Let's Begin, Player '"+player+"'!";
         para.style.marginBottom = "15px";
         para.style.backgroundColor = "#cbd5e0";
         para.style.fontSize = "24px";
