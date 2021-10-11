@@ -8,20 +8,22 @@ window.onload = function(){
     const status = document.getElementById("status");
     const gameboard = document.getElementById("board");
     const board_tiles = gameboard.getElementsByTagName("div");
-    const controls = document.getElementsByClassName("controls")[0];
+    // const controls = document.getElementsByClassName("controls")[0];
     const new_game = document.getElementsByClassName("btn");
     const players = ["X","O"];
     const para = document.createElement("div");
-
+    para.innerHTML = "Let's Begin, Player '"+player+"'!";
     let caption = document.createElement("caption");
     let x_score = document.createElement("td");
     let o_score = document.createElement("td");
     x_score.innerHTML = wins[0];
     o_score.innerHTML = wins[1]; 
+    style_xo();
     points_table();
 
-    controls.insertBefore(para, new_game[0]);
+    game.insertBefore(para, gameboard);
     new_game[0].style.margin = "10px 80px";
+    para.style.marginBottom = "15px";
     para.style.backgroundColor = "#cbd5e0";
     para.style.fontSize = "24px";
     para.style.width = "250px";
