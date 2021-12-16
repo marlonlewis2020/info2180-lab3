@@ -7,6 +7,7 @@ window.onload = function(){
     const board_tiles = gameboard.getElementsByTagName("div");
     const new_game = document.getElementsByClassName("btn");
     const players = ["X","O"];
+    
 
     const para = document.createElement("div");
     let score_table = document.createElement("table");
